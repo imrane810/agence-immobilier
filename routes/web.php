@@ -8,5 +8,5 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->name('admin.')->group(function() {
-    Route::resource('properties', propertiesController::class)->except(['show']);
+    Route::resource('properties', propertiesController::class);
 });
