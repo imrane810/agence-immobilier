@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\propertiesController;
+use App\Http\Controllers\Admin\PropertyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,5 +8,5 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->name('admin.')->group(function() {
-    Route::resource('properties', propertiesController::class);
+    Route::resource('properties', PropertyController::class);
 });
