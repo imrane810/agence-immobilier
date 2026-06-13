@@ -2,6 +2,8 @@
 
 @section('content')
 
+@section('title', 'show')
+
 <div class="container-fluid">
 
     {{-- HEADER --}}

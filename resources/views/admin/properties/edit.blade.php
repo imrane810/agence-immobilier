@@ -1,14 +1,47 @@
 @extends('layouts.admin')
 
+@section('title', 'Modifier un bien')
+
 @section('content')
-<h1>Modifier le bien</h1>
 
-<form action="{{ route('admin.properties.update', $property) }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
+<div class="container">
 
-    @include('admin.properties.shared.form', ['property' => $property])
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Modifier un bien</h1>
 
-    <button class="btn btn-success mt-3">Modifier</button>
-</form>
+        <a href="{{ route('admin.properties.index') }}" class="btn btn-secondary">
+            Retour
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <form action="{{ route('admin.properties.update', $property) }}" method="POST"
+                enctype="multipart/form-data">
+
+                @csrf
+                @method('PUT')
+
+                @include('admin.properties.shared.form', [
+                'property' => $property
+                ])
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success">
+                        Modifier
+                    </button>
+
+                    <a href="{{ route('admin.properties.index') }}" class="btn btn-outline-secondary">
+                        Annuler
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
 @endsection

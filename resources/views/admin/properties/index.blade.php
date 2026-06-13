@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'index')
+
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-4">
