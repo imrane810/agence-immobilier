@@ -9,7 +9,7 @@ use App\Http\Requests\UpdatePropertyRequest;
 use Illuminate\Support\Facades\Storage;
 
 
-class PropertyController extends Controller
+class AdminPropertyController extends Controller
 {
     /**
      * LISTE
@@ -60,6 +60,7 @@ class PropertyController extends Controller
             }
         }
 
+     
         return redirect()
             ->route('admin.properties.index')
             ->with('success', 'Property created successfully');

@@ -28,8 +28,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin.properties.index', absolute: false));
-        
+        $user = auth()->user();
+
+        return $user->isAdmin()
+            ? redirect()->route('admin.properties.index')
+            : redirect()->route('customer');
     }
 
     /**
@@ -43,8 +46,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        dd($request->all());
-        
-        return redirect('/login');
+        return redirect('/');
     }
 }

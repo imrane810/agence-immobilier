@@ -2,19 +2,22 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\PropertyController;
-
-Route::get('/', function () {
-    return view('auth.login');
-});
+use App\Http\Controllers\Admin\AdminPropertyController;
+use App\Http\Controllers\Customer\PropertyController;
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function() {
-    Route::resource('properties', PropertyController::class);
+    Route::resource('properties', AdminPropertyController::class);
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', function () {
+    return view('customer.home');
+})->name('customer');
+
+Route::get('/properties', [PropertyController::class, 'index'])
+    ->name('properties.index');
+
+Route::get('/properties/{property}', [PropertyController::class, 'show'])
+    ->name('properties.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

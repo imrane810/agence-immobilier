@@ -446,10 +446,7 @@
             SIDEBAR
             ======================================== --}}
             <aside class="col-md-2 col-lg-2 sidebar d-none d-md-block">
-                <div class="brand">
-                    <i class="fas fa-building"></i> MonApp
-                </div>
-                @include('components.sidebar')
+                @include('admin.components.sidebar')
             </aside>
 
             {{-- ========================================
@@ -458,7 +455,7 @@
             <main class="col-md-10 col-lg-10 main-content">
 
                 {{-- Navbar --}}
-                @include('components.navbar')
+                @include('admin.components.navbar')
 
                 {{-- Page Content --}}
                 <div class="content-wrapper fade-in">
