@@ -1,47 +1,43 @@
 @if(auth()->user()->isAdmin())
+<div class="sidebar">
 
-<a href="{{ route('properties.index') }}">
-    Properties
-</a>
+    {{-- Brand --}}
+    <div class="brand">
+        <i class="fas fa-building"></i> Immo Admin
+    </div>
 
-<a href="{{ route('reservations.index') }}">
-    Reservations
-</a>
+    {{-- Navigation --}}
+    <nav class="nav flex-column">
 
-@endif
+        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            <i class="fas fa-chart-pie"></i> Dashboard
+        </a>
 
-<div class="bg-dark text-white vh-100 p-3">
+        <a href="{{ route('admin.properties.index') }}"
+            class="nav-link {{ request()->routeIs('admin.properties.*') ? 'active' : '' }}">
+            <i class="fas fa-home"></i> Properties
+        </a>
 
-    <h4 class="mb-4 text-center">
-        Immo Admin
-    </h4>
+        <a href="#" class="nav-link">
+            <i class="fas fa-calendar-check"></i> Reservations
+        </a>
 
-    <ul class="nav flex-column">
+        <a href="#" class="nav-link">
+            <i class="fas fa-credit-card"></i> Paiement
+        </a>
 
-        <li class="nav-item mb-2">
-            <a href="#" class="nav-link text-white">
-                Dashbord
-            </a>
-        </li>
+        {{-- Séparateur --}}
+        <hr class="my-2" style="border-color: rgba(255,255,255,0.08);">
 
-        <li class="nav-item mb-2">
-            <a href="{{ route('admin.properties.index') }}" class="nav-link text-white">
-                Properties
-            </a>
-        </li>
+        {{-- Logout --}}
+        <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="fas fa-sign-out-alt"></i> Déconnexion
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
 
-        <li class="nav-item mb-2">
-            <a href="#" class="nav-link text-white">
-                Reservations
-            </a>
-        </li>
-
-        <li class="nav-item mb-2">
-            <a href="#" class="nav-link text-white">
-                Paiment
-            </a>
-        </li>
-
-    </ul>
+    </nav>
 
 </div>
+@endif

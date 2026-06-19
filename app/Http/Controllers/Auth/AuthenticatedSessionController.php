@@ -29,6 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended(route('admin.properties.index', absolute: false));
+        
     }
 
     /**
@@ -42,6 +43,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        dd($request->all());
+        
+        return redirect('/login');
     }
 }
