@@ -7,14 +7,22 @@
 {{-- BREADCRUMB --}}
 <nav aria-label="breadcrumb" class="mb-4">
     <ol class="breadcrumb" style="background: transparent; padding: 0; margin: 0;">
-        <li class="breadcrumb-item"><a href="/" style="color: var(--primary-light); text-decoration: none;">Accueil</a>
+        <li class="breadcrumb-item">
+            <a href="/" style="color: var(--primary-light); text-decoration: none;">Accueil</a>
         </li>
-        <li class="breadcrumb-item"><a href="{{ route('properties.index') }}"
-                style="color: var(--primary-light); text-decoration: none;">Biens</a></li>
-        <li class="breadcrumb-item active" style="color: var(--text-gray);">{{ Str::limit($property->title, 30) }}</li>
+        <li class="breadcrumb-item">
+            <a href="{{ route('properties.index') }}"
+                style="color: var(--primary-light); text-decoration: none;">Biens</a>
+        </li>
+        <li class="breadcrumb-item active" style="color: var(--text-gray);">
+            {{ Str::limit($property->title, 30) }}
+        </li>
     </ol>
 </nav>
 
+{{-- ==========================================
+    DÉTAIL DU BIEN
+========================================== --}}
 <div class="row g-4">
 
     {{-- LEFT: IMAGES --}}
@@ -139,4 +147,256 @@
 
 </div>
 
+{{-- ==========================================
+    PROPRIÉTÉS SIMILAIRES
+========================================== --}}
+@php
+$similarProperties = \App\Models\Property::where('id', '!=', $property->id)
+->where(function($query) use ($property) {
+$query->where('city', $property->city)
+->orWhere('type', $property->type);
+})
+->latest()
+->take(4)
+->get();
+@endphp
+
+@if($similarProperties->count() > 0)
+<section class="mt-5 pt-4 border-top">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2 class="section-title">Propriétés similaires</h2>
+            <p class="section-subtitle">Découvrez d'autres biens qui pourraient vous intéresser</p>
+        </div>
+        <a href="{{ route('properties.index') }}" class="btn-outline-public">
+            Voir tout <i class="fas fa-arrow-right ms-1"></i>
+        </a>
+    </div>
+
+    <div class="row g-4">
+        @foreach($similarProperties as $similar)
+        <div class="col-md-3 col-sm-6">
+            <div class="property-card">
+                {{-- Image --}}
+                @if($similar->main_image)
+                <img src="{{ asset('storage/'.$similar->main_image) }}" class="card-img-top"
+                    alt="{{ $similar->title }}">
+                @else
+                <div class="card-img-top property-card-placeholder">
+                    <i class="fas fa-home"></i>
+                </div>
+                @endif
+
+                {{-- Body --}}
+                <div class="card-body">
+                    <h5 class="card-title">{{ Str::limit($similar->title, 30) }}</h5>
+                    <p class="card-text">{{ Str::limit($similar->description ?? 'Superbe propriété à découvrir', 50) }}
+                    </p>
+
+                    {{-- Prix --}}
+                    <div class="price-tag">
+                        {{ number_format($similar->price_per_day, 0, ',', ' ') }} MAD
+                        <span class="price-unit">/ jour</span>
+                    </div>
+
+                    {{-- Meta --}}
+                    <div class="property-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> {{ $similar->city }}</span>
+                        <span><i class="fas fa-bed"></i> {{ $similar->rooms }}</span>
+                    </div>
+
+                    {{-- Bouton --}}
+                    <div class="mt-2">
+                        <a href="{{ route('properties.show', $similar) }}" class="btn-primary-public w-100 text-center"
+                            style="font-size: 0.85rem; padding: 0.4rem 1rem;">
+                            <i class="fas fa-eye me-1"></i> Voir
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</section>
+@endif
+
 @endsection
+
+@push('styles')
+<style>
+/* ==========================================
+       PROPERTY CARDS
+    ========================================== */
+.property-card {
+    background: var(--white);
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    overflow: hidden;
+    height: 100%;
+}
+
+.property-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-6px);
+}
+
+.property-card .card-img-top {
+    height: 180px;
+    object-fit: cover;
+}
+
+.property-card-placeholder {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F3F4F6;
+}
+
+.property-card-placeholder i {
+    font-size: 3rem;
+    color: #D1D5DB;
+}
+
+.property-card .card-body {
+    padding: 1rem;
+}
+
+.property-card .card-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.property-card .card-text {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.price-tag {
+    font-weight: 700;
+    color: var(--primary-light);
+    font-size: 1rem;
+}
+
+.price-unit {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--text-gray);
+}
+
+.property-meta {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--text-gray);
+    padding-top: 0.5rem;
+    border-top: 1px solid #F3F4F6;
+    margin-top: 0.5rem;
+}
+
+.property-meta i {
+    color: var(--primary-light);
+    width: 14px;
+}
+
+.btn-primary-public {
+    background: var(--primary-light);
+    border: none;
+    color: var(--white);
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary-public:hover {
+    background: var(--primary-hover);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-outline-public {
+    background: transparent;
+    border: 1.5px solid var(--primary-light);
+    color: var(--primary-light);
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-outline-public:hover {
+    background: var(--primary-light);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.section-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.section-subtitle {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* ==========================================
+       RESPONSIVE
+    ========================================== */
+@media (max-width: 768px) {
+
+    .property-card .card-img-top,
+    .property-card-placeholder {
+        height: 160px;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .property-card .card-img-top,
+    .property-card-placeholder {
+        height: 140px;
+    }
+
+    .property-card .card-body {
+        padding: 0.75rem;
+    }
+
+    .property-card .card-title {
+        font-size: 0.85rem;
+    }
+
+    .price-tag {
+        font-size: 0.9rem;
+    }
+}
+</style>
+@endpush

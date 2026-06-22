@@ -26,6 +26,13 @@
             <i class="fas fa-credit-card"></i> Paiement
         </a>
 
+        <a href="{{ route('admin.users.index') }}" class="nav-link">
+            <i class="fas fa-user"></i> Utilisateurs
+        </a>
+        <a href="{{ route('admin.contacts.index') }}" class="nav-link">
+            <i class="fas fa-address-book"></i> Contact
+        </a>
+
         {{-- Séparateur --}}
         <hr class="my-2" style="border-color: rgba(255,255,255,0.08);">
 

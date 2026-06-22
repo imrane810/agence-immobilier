@@ -14,7 +14,7 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
 
-            {{-- MENU PRINCIPAL --}}
+            {{-- Menu principal --}}
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/"
@@ -36,16 +36,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="#"
+                    <a class="nav-link {{ request()->is('contact*') ? 'active' : '' }}" href="/contact"
                         style="color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.25s ease-in-out;">
                         <i class="fas fa-envelope me-1"></i> Contact
                     </a>
                 </li>
             </ul>
 
-            {{-- MENU UTILISATEUR --}}
+            {{-- Menu utilisateur --}}
             <ul class="navbar-nav">
-
                 @guest
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="{{ route('login') }}"
@@ -62,7 +61,6 @@
                 @endguest
 
                 @auth
-                {{-- Profil --}}
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('profile*') ? 'active' : '' }}"
                         href="{{ route('profile.edit') }}"
@@ -70,8 +68,6 @@
                         <i class="fas fa-user me-1"></i> Profil
                     </a>
                 </li>
-
-                {{-- Avatar + Nom --}}
                 <li class="nav-item d-flex align-items-center gap-2">
                     <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
                         style="width: 34px; height: 34px; background: var(--primary-light); font-size: 0.8rem;">
@@ -82,8 +78,6 @@
                         {{ auth()->user()->name }}
                     </span>
                 </li>
-
-                {{-- Logout --}}
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST" class="m-0">
                         @csrf
@@ -94,7 +88,6 @@
                     </form>
                 </li>
                 @endauth
-
             </ul>
 
         </div>

@@ -107,7 +107,7 @@
             <a href="{{ route('properties.index') }}?city=Agadir" class="city-link">
                 <div class="city-card">
                     <div class="city-card-image">
-                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=400&fit=crop"
+                        <img src="https://chicmorocco.com/wp-content/uploads/2023/08/puerto-deportivo-agadir.jpg"
                             alt="Agadir">
                         <div class="city-card-overlay">
                             <div class="city-card-name">
@@ -128,7 +128,7 @@
             <a href="{{ route('properties.index') }}?city=Taghazout" class="city-link">
                 <div class="city-card">
                     <div class="city-card-image">
-                        <img src="https://images.unsplash.com/photo-1537956965359-757f2c4c9e03?w=800&h=400&fit=crop"
+                        <img src="https://www.thehotelguru.com/_images/5f/35/5f355b08ce0aead141079dcac1c74961/s1180x560.jpg"
                             alt="Taghazout">
                         <div class="city-card-overlay">
                             <div class="city-card-name">

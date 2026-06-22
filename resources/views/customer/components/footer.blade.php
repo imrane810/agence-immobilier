@@ -153,7 +153,7 @@
             <div class="col-md-6 text-center text-md-end">
                 <p style="margin: 0; font-size: 0.75rem; color: rgba(255,255,255,0.3);">
                     <i class="fas fa-code me-1"></i>
-                    Développé avec <i class="fas fa-heart" style="color: #EF4444;"></i> au Maroc
+                    Développé avec <i class="fas fa-heart" style="color: #EF4444;"></i> Par Imrane
                 </p>
             </div>
         </div>
