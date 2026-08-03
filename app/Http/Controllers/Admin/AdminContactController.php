@@ -27,21 +27,19 @@ class AdminContactController extends Controller
         );
     }
 
-    public function update(Contact $contact)
-{
-    // toggle simple de statut
-    if ($contact->status === 'new') {
-        $contact->status = 'read';
-    } elseif ($contact->status === 'read') {
-        $contact->status = 'answered';
+    public function update(Request $request, Contact $contact)
+    {
+        $request->validate([
+            'status' => 'required|in:new,read,answered'
+        ]);
+
+        $contact->update([
+            'status' => $request->status
+        ]);
+
+        return back()
+            ->with('success', 'Status updated.');
     }
-
-    $contact->save();
-
-    return redirect()
-        ->route('admin.contacts.index')
-        ->with('success', 'Status updated successfully.');
-}
     public function destroy(Contact $contact)
     {
         $contact->delete();

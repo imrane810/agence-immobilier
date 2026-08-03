@@ -22,7 +22,7 @@ $isEdit = $property->exists;
             Prix par jour <span class="text-danger">*</span>
         </label>
         <input type="number" name="price_per_day" class="form-control-custom w-100"
-            value="{{ old('price_per_day', $property->price_per_day) }}" placeholder="Ex: 1500">
+            value="{{ old('price_per_day', $property->price_per_day) }}" placeholder="Ex: 300">
         @error('price_per_day')
         <small class="text-danger d-block mt-1">{{ $message }}</small>
         @enderror
@@ -52,7 +52,7 @@ $isEdit = $property->exists;
             Ville <span class="text-danger">*</span>
         </label>
         <input type="text" name="city" class="form-control-custom w-100" value="{{ old('city', $property->city) }}"
-            placeholder="Ex: Casablanca">
+            placeholder="Ex: Agadir">
         @error('city')
         <small class="text-danger d-block mt-1">{{ $message }}</small>
         @enderror

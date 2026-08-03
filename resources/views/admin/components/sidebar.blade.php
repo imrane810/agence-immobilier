@@ -37,10 +37,13 @@
         <hr class="my-2" style="border-color: rgba(255,255,255,0.08);">
 
         {{-- Logout --}}
+        <a href="{{ route('profile.edit') }}" class="nav-link">
+            <i class="fas fa-user-circle"></i> Profile
+        </a>
         <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="fas fa-sign-out-alt"></i> Déconnexion
         </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
             @csrf
         </form>
 

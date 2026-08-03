@@ -1,5 +1,10 @@
-@extends('layouts.app')
+@php
+$layout = auth()->user()->role === 'admin'
+? 'layouts.admin'
+: 'layouts.app';
+@endphp
 
+@extends($layout)
 @section('title', 'Mon profil')
 @section('page-title', 'Mon profil')
 

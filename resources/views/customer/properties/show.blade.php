@@ -128,10 +128,10 @@
                     style="padding: 0.75rem; font-weight: 600; text-align: center;">
                     <i class="fas fa-calendar-check me-2"></i> Réserver
                 </button>
-                <button class="btn-outline-public" style="padding: 0.75rem 1.25rem;"
+                <!-- <button class="btn-outline-public" style="padding: 0.75rem 1.25rem;"
                     onclick="alert('Fonctionnalité à venir')">
                     <i class="fas fa-heart"></i>
-                </button>
+                </button> -->
             </div>
 
             {{-- Back --}}

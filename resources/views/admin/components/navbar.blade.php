@@ -30,7 +30,7 @@
                     </div>
 
                     {{-- Bouton logout --}}
-                    <form method="POST" action="{{ route('logout') }}" class="m-0">
+                    <form method="POST" action="{{ route('admin.logout') }}" class="m-0">
                         @csrf
                         <button type="submit" class="btn btn-outline-danger btn-sm px-3"
                             style="border-radius: 8px; font-weight: 500; font-size: 0.8rem; border-width: 1.5px;">

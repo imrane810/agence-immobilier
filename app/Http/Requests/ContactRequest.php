@@ -23,16 +23,4 @@ class ContactRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
-    {
-        return [
-            'first_name.required' => 'Le prénom est obligatoire.',
-            'last_name.required'  => 'Le nom est obligatoire.',
-            'email.required'      => 'L\'email est obligatoire.',
-            'email.email'         => 'Veuillez saisir un email valide.',
-            'subject.required'    => 'Le sujet est obligatoire.',
-            'message.required'    => 'Le message est obligatoire.',
-            'message.min'         => 'Le message doit contenir au moins 10 caractères.',
-        ];
-    }
 }

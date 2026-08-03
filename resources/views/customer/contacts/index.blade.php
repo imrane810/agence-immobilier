@@ -101,6 +101,24 @@
                 <p class="mb-0">Nous vous répondons dans les plus brefs délais</p>
             </div>
 
+            {{-- MESSAGE DE SUCCÈS --}}
+            @if(session('success'))
+            <div class="alert-contact-success">
+                <i class="fas fa-check-circle me-2"></i>
+                {{ session('success') }}
+            </div>
+            @endif
+
+            {{-- ERREURS GÉNÉRALES --}}
+            @if($errors->any())
+            <div class="alert-contact-danger">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                @foreach($errors->all() as $error)
+                {{ $error }}<br>
+                @endforeach
+            </div>
+            @endif
+
             <form method="POST" action="{{ route('contact.store') }}">
                 @csrf
 
@@ -337,6 +355,27 @@
     font-size: 0.9rem;
     color: var(--text-gray);
     margin-bottom: 0;
+}
+
+/* ==========================================
+       ALERTS
+    ========================================== */
+.alert-contact-success {
+    background: #D1FAE5;
+    color: #065F46;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #10B981;
+}
+
+.alert-contact-danger {
+    background: #FEE2E2;
+    color: #991B1B;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #EF4444;
 }
 
 /* ==========================================
