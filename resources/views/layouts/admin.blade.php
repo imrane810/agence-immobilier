@@ -446,16 +446,13 @@
             SIDEBAR
             ======================================== --}}
             <aside class="col-md-2 col-lg-2 sidebar d-none d-md-block">
-                @include('admin.components.sidebar')
+                @include('admin.partials.sidebar')
             </aside>
 
             {{-- ========================================
             MAIN CONTENT
             ======================================== --}}
             <main class="col-md-10 col-lg-10 main-content">
-
-                {{-- Navbar --}}
-                @include('admin.components.navbar')
 
                 {{-- Page Content --}}
                 <div class="content-wrapper fade-in">

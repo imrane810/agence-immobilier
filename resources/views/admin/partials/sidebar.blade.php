@@ -37,7 +37,7 @@
         <hr class="my-2" style="border-color: rgba(255,255,255,0.08);">
 
         {{-- Logout --}}
-        <a href="{{ route('profile.edit') }}" class="nav-link">
+        <a href="{{ route('admin.profile.edit') }}" class="nav-link">
             <i class="fas fa-user-circle"></i> Profile
         </a>
         <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

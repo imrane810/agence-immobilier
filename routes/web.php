@@ -19,12 +19,13 @@ Route::middleware(['auth:admin', 'admin'])
     ->group(function () {
 
         Route::resource('properties', AdminPropertyController::class);
-
         Route::get('/users', [AdminUserController::class, 'index'])
             ->name('users.index');
-
         Route::resource('contacts', AdminContactController::class)
             ->only(['index', 'show', 'update', 'destroy']);
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
 Route::prefix('admin')->name('admin.')->group(function () {
